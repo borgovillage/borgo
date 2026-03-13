@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Borgo — Legal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:   #1B3A5C;
+      --ocean:  #2A6496;
+      --wave:   #3A8FBF;
+      --fog:    #F4F8FA;
+      --mist:   #E8F2F7;
+      --text:   #0D2137;
+      --mid:    #3A5A78;
+      --light:  #7A9BB5;
+      --border: #D6E9F2;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--fog);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--navy);
+      padding: 32px 24px 28px;
+      text-align: center;
+    }
+    .logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 36px;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    /* ── Nav tabs ── */
+    nav {
+      background: #fff;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      padding: 16px 32px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--light);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--navy);
+      border-bottom-color: var(--navy);
+    }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Sections ── */
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+
+    /* ── Typography ── */
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .effective {
+      font-size: 12px;
+      color: var(--light);
+      margin-bottom: 36px;
+      font-style: italic;
+    }
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 32px 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    p {
+      font-size: 14px;
+      color: var(--mid);
+      margin-bottom: 14px;
+    }
+    ul {
+      margin: 0 0 14px 20px;
+    }
+    ul li {
+      font-size: 14px;
+      color: var(--mid);
+      margin-bottom: 6px;
+    }
+    strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    a {
+      color: var(--ocean);
+    }
+
+    /* ── Highlight box ── */
+    .highlight {
+      background: var(--mist);
+      border-left: 3px solid var(--navy);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 13px;
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      text-align: center;
+    }
+    .contact-card p {
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .contact-card a {
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 11px;
+      color: var(--light);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Borgo</div>
+  <div class="tagline">Your village, ready to go.</div>
+</header>
+
+<nav>
+  <a href="#" class="active" onclick="show('privacy', this)">Privacy Policy</a>
+  <a href="#" onclick="show('terms', this)">Terms of Service</a>
+</nav>
+
+<main>
+
+  <!-- ── PRIVACY POLICY ── -->
+  <div id="privacy" class="section active">
+    <h1>Privacy Policy</h1>
+    <p class="effective">Effective date: March 2026</p>
+
+    <div class="highlight">
+      Borgo is built on trust. We collect only what's needed to coordinate rides for your child, and we never sell your data.
+    </div>
+
+    <h2>1. What We Collect</h2>
+    <p>When you use Borgo, we may collect:</p>
+    <ul>
+      <li><strong>Account information</strong> — your name, email address, and password when you create an account.</li>
+      <li><strong>Profile information</strong> — your phone number and home address, used to coordinate pickups.</li>
+      <li><strong>Roster information</strong> — player names and parent contact details imported by a coach from their team roster.</li>
+      <li><strong>Ride data</strong> — events, ride requests, confirmations, and responses to ride check messages.</li>
+      <li><strong>SMS replies</strong> — when a parent replies YES or NO to a ride check, we record that response to update the coach dashboard.</li>
+    </ul>
+
+    <h2>2. How We Use Your Information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Send ride check SMS messages to parents on behalf of their team coach.</li>
+      <li>Update coaches in real time when a parent responds.</li>
+      <li>Notify co-parents and secondary contacts about ride confirmations.</li>
+      <li>Send reminders before confirmed rides.</li>
+      <li>Improve the Borgo app and fix issues.</li>
+    </ul>
+    <p>We do <strong>not</strong> use your information for advertising, and we do <strong>not</strong> sell your data to any third party.</p>
+
+    <h2>3. SMS Messaging</h2>
+    <p>Borgo sends SMS messages to phone numbers provided by team coaches as part of their roster. These messages are used solely to coordinate transportation for youth sports events. Parents may opt out of SMS messages at any time by replying <strong>STOP</strong> to any message. Standard message and data rates may apply.</p>
+
+    <h2>4. Who We Share Data With</h2>
+    <p>We share data only with the services necessary to operate Borgo:</p>
+    <ul>
+      <li><strong>Twilio</strong> — for sending and receiving SMS messages. Twilio's privacy policy is available at twilio.com/legal/privacy.</li>
+      <li><strong>Supabase</strong> — for database and authentication services.</li>
+    </ul>
+    <p>We do not share your personal information with any other third parties.</p>
+
+    <h2>5. Data Retention</h2>
+    <p>We retain your data for as long as your account is active. You may request deletion of your data at any time by contacting us at the address below. We will delete your data within 30 days of a verified request.</p>
+
+    <h2>6. Children's Privacy</h2>
+    <p>Borgo is designed for use by parents and coaches of youth athletes. We do not knowingly collect personal information directly from children under 13. Player information (names and ages) is provided by coaches and parents solely for the purpose of coordinating transportation.</p>
+
+    <h2>7. Security</h2>
+    <p>We take reasonable measures to protect your information, including encrypted connections (HTTPS), secure authentication, and restricted access to personal data. However, no method of transmission over the internet is 100% secure.</p>
+
+    <h2>8. Your Rights</h2>
+    <p>You have the right to access, correct, or delete your personal information at any time. To exercise these rights, contact us at the address below.</p>
+
+    <h2>9. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify users of significant changes via the app or by email. Continued use of Borgo after changes constitutes acceptance of the updated policy.</p>
+
+    <h2>10. Contact</h2>
+    <p>If you have questions about this Privacy Policy, please contact us:</p>
+
+    <div class="contact-card">
+      <p>Questions about privacy?</p>
+      <a href="mailto:privacy@borgoapp.com">privacy@borgoapp.com</a>
+    </div>
+  </div>
+
+  <!-- ── TERMS OF SERVICE ── -->
+  <div id="terms" class="section">
+    <h1>Terms of Service</h1>
+    <p class="effective">Effective date: March 2026</p>
+
+    <div class="highlight">
+      By using Borgo, you agree to these terms. Please read them — they're written in plain English.
+    </div>
+
+    <h2>1. What Borgo Is</h2>
+    <p>Borgo is a carpool coordination app for youth sports families. It helps coaches send ride check messages to parents and helps families coordinate transportation to games, practices, and events.</p>
+
+    <h2>2. Who Can Use Borgo</h2>
+    <p>Borgo is intended for:</p>
+    <ul>
+      <li>Parents and guardians of youth athletes</li>
+      <li>Coaches and team administrators of youth sports teams</li>
+    </ul>
+    <p>You must be at least 18 years old to create an account. By using Borgo, you confirm that you are 18 or older.</p>
+
+    <h2>3. Coach Responsibilities</h2>
+    <p>If you use Borgo as a coach, you agree to:</p>
+    <ul>
+      <li>Only import roster information for players on your team whose families have a reasonable expectation of receiving team communications.</li>
+      <li>Use SMS ride checks only for the purpose of coordinating transportation to team events.</li>
+      <li>Not send spam, unsolicited messages, or messages unrelated to team transportation.</li>
+      <li>Keep roster data secure and not share it outside of Borgo.</li>
+    </ul>
+
+    <h2>4. SMS Consent</h2>
+    <p>By providing a phone number to a coach for inclusion in a team roster, parents and guardians consent to receiving SMS messages from Borgo related to ride coordination for their child's sports events. You may opt out at any time by replying <strong>STOP</strong> to any message.</p>
+
+    <h2>5. Prohibited Uses</h2>
+    <p>You agree not to use Borgo to:</p>
+    <ul>
+      <li>Send harassing, threatening, or abusive messages to other users.</li>
+      <li>Collect or misuse other users' personal information.</li>
+      <li>Impersonate a coach, parent, or Borgo staff member.</li>
+      <li>Attempt to access systems or data you are not authorized to access.</li>
+      <li>Use the platform for any purpose other than youth sports transportation coordination.</li>
+    </ul>
+
+    <h2>6. Rides and Safety</h2>
+    <p>Borgo facilitates communication between families but does not provide transportation services. We are not responsible for the conduct of drivers or passengers. Users are responsible for their own safety and the safety of any children in their care during any ride arranged through Borgo.</p>
+    <p>We strongly encourage all users to:</p>
+    <ul>
+      <li>Verify the identity of drivers before allowing a child to ride with them.</li>
+      <li>Ensure appropriate car seats or booster seats are used for children who require them.</li>
+      <li>Use good judgment when accepting rides from other families.</li>
+    </ul>
+
+    <h2>7. Disclaimers</h2>
+    <p>Borgo is provided "as is" without warranties of any kind. We do not guarantee that the service will be uninterrupted, error-free, or that SMS messages will be delivered in all cases. We are not liable for any failed deliveries, missed rides, or damages arising from use of the app.</p>
+
+    <h2>8. Termination</h2>
+    <p>We reserve the right to suspend or terminate accounts that violate these terms. You may delete your account at any time through the app settings or by contacting us.</p>
+
+    <h2>9. Changes to These Terms</h2>
+    <p>We may update these Terms of Service from time to time. We will notify users of significant changes via the app or email. Continued use of Borgo after changes constitutes acceptance of the updated terms.</p>
+
+    <h2>10. Governing Law</h2>
+    <p>These terms are governed by the laws of the Commonwealth of Massachusetts, without regard to conflict of law principles.</p>
+
+    <h2>11. Contact</h2>
+    <p>Questions about these terms?</p>
+
+    <div class="contact-card">
+      <p>Questions about our terms?</p>
+      <a href="mailto:legal@borgoapp.com">legal@borgoapp.com</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Borgo · All rights reserved
+</footer>
+
+<script>
+  function show(id, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+</script>
+
+</body>
+</html>
