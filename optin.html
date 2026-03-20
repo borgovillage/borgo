@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borgo — SMS Opt-In</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B3A5C;
+      --ocean:  #2A6496;
+      --wave:   #3A8FBF;
+      --seafoam:#4BAF9C;
+      --teal:   #2E8B7A;
+      --coral:  #E07B5A;
+      --sand:   #E8C97A;
+      --fog:    #F4F8FA;
+      --mist:   #E8F2F7;
+      --surf:   #D0E8F0;
+      --dark:   #0D2137;
+      --mid:    #3A5A78;
+      --light:  #7A9BB5;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--fog);
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: var(--navy);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+      font-style: italic;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .logo-tag {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      font-style: normal;
+      margin-left: 4px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--ocean) 100%);
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+      width: 100%;
+    }
+
+    /* Info card */
+    .info-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1.5px solid var(--surf);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .info-card h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .info-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .info-text {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+    .info-text strong {
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    /* What you'll receive */
+    .what-card {
+      background: var(--mist);
+      border-radius: 16px;
+      border: 1.5px solid var(--surf);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .what-card h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .msg-example {
+      background: #fff;
+      border-radius: 12px;
+      border: 1.5px solid var(--surf);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.6;
+      position: relative;
+    }
+    .msg-example:last-child { margin-bottom: 0; }
+    .msg-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--light);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* Opt-in form */
+    .form-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1.5px solid var(--surf);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .form-card h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .form-card .subtitle {
+      font-size: 13px;
+      color: var(--light);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .field-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--mid);
+      margin-bottom: 6px;
+      display: block;
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"] {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--surf);
+      border-radius: 12px;
+      font-size: 15px;
+      color: var(--dark);
+      background: var(--fog);
+      outline: none;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    input:focus {
+      border-color: var(--navy);
+      background: #fff;
+    }
+
+    /* Consent checkbox */
+    .consent-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px;
+      background: var(--fog);
+      border-radius: 12px;
+      border: 1.5px solid var(--surf);
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .consent-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      flex-shrink: 0;
+      cursor: pointer;
+      accent-color: var(--navy);
+      margin-top: 1px;
+    }
+    .consent-text {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+    .consent-text a {
+      color: var(--ocean);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .consent-text a:hover { text-decoration: underline; }
+
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.3px;
+    }
+    .submit-btn:hover { background: var(--ocean); }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled {
+      background: var(--surf);
+      color: var(--light);
+      cursor: not-allowed;
+    }
+
+    /* Success state */
+    .success-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1.5px solid var(--seafoam);
+      padding: 40px 24px;
+      text-align: center;
+      display: none;
+    }
+    .success-card .checkmark {
+      font-size: 52px;
+      margin-bottom: 16px;
+    }
+    .success-card h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+    .success-card p {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.6;
+      max-width: 320px;
+      margin: 0 auto 20px;
+    }
+    .success-card .stop-note {
+      font-size: 12px;
+      color: var(--light);
+      background: var(--fog);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: inline-block;
+    }
+
+    /* Opt out section */
+    .optout-card {
+      background: var(--fog);
+      border-radius: 14px;
+      border: 1.5px solid var(--surf);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .optout-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .optout-card p {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+    .optout-card .stop-pill {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin: 0 2px;
+    }
+
+    /* Legal footer */
+    .legal-note {
+      font-size: 12px;
+      color: var(--light);
+      text-align: center;
+      line-height: 1.7;
+      padding: 0 8px;
+    }
+    .legal-note a {
+      color: var(--ocean);
+      text-decoration: none;
+    }
+    .legal-note a:hover { text-decoration: underline; }
+
+    footer {
+      background: var(--navy);
+      padding: 20px 24px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+    footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+    }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Borgo <span class="logo-tag">· ride coordination</span></div>
+  </header>
+
+  <div class="hero">
+    <h1>SMS Opt-In for<br>Ride Coordination</h1>
+    <p>Your coach uses Borgo to coordinate rides for your team. Fill out the form below to confirm you'd like to receive ride check messages.</p>
+  </div>
+
+  <main>
+
+    <!-- What Borgo does -->
+    <div class="info-card">
+      <h2>🏘️ What is Borgo?</h2>
+      <div class="info-row">
+        <span class="info-icon">📋</span>
+        <span class="info-text"><strong>Ride checks</strong> — Before events, your coach sends a quick text asking if your child needs a ride. Reply YES or NO — no app needed.</span>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚗</span>
+        <span class="info-text"><strong>Ride coordination</strong> — When rides are confirmed, both parents get notified automatically. No more wondering if your kid has a ride.</span>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🔒</span>
+        <span class="info-text"><strong>Your team only</strong> — Messages come from your coach, for your team's events. Never used for marketing or shared with third parties.</span>
+      </div>
+    </div>
+
+    <!-- Sample messages -->
+    <div class="what-card">
+      <h2>📱 What messages will I receive?</h2>
+      <div class="msg-example">
+        <div class="msg-label">Example — Ride Check</div>
+        Hi Sarah, this is Coach Mike from Borgo, your team's carpool app. Does Emma need a ride to Lightning FC Practice on Sat Mar 21 at 11:00 AM? Reply YES if she needs a ride, or NO if she's sorted. Reply STOP to opt out. Msg &amp; data rates may apply.
+      </div>
+      <div class="msg-example">
+        <div class="msg-label">Example — Ride Confirmed</div>
+        Borgo: A ride has been confirmed for Emma to Lightning FC Practice on Sat Mar 21. The Johnson family will pick her up. Reply STOP to opt out. Msg &amp; data rates may apply.
+      </div>
+    </div>
+
+    <!-- Opt-out info BEFORE form -->
+    <div class="optout-card">
+      <h3>Want to opt out before receiving any texts?</h3>
+      <p>You don't need to submit this form to opt out. Simply contact your coach and ask to be removed from the Borgo roster. If you've already received a text, reply <span class="stop-pill">STOP</span> to any message at any time. You will not receive further messages.</p>
+    </div>
+
+    <!-- The form -->
+    <div class="form-card" id="formCard">
+      <h2>✅ Confirm your opt-in</h2>
+      <p class="subtitle">Fill out this form to confirm you'd like to receive ride coordination texts from your coach via Borgo.</p>
+
+      <label class="field-label" for="name">Your name</label>
+      <input type="text" id="name" placeholder="e.g. Sarah Johnson" autocomplete="name">
+
+      <label class="field-label" for="phone">Mobile number</label>
+      <input type="tel" id="phone" placeholder="(508) 555-0100" autocomplete="tel">
+
+      <label class="field-label" for="team">Team name</label>
+      <input type="text" id="team" placeholder="e.g. Lightning FC U12">
+
+      <label class="consent-row" for="consent">
+        <input type="checkbox" id="consent">
+        <span class="consent-text">
+          I agree to receive SMS ride coordination messages from my child's coach via Borgo. I understand that message frequency varies (typically 1–3 messages per event), standard message and data rates may apply, and I can opt out at any time by replying STOP to any message. I have read the <a href="/borgo/" target="_blank">Privacy Policy</a> and <a href="/borgo/" target="_blank">Terms of Service</a>.
+        </span>
+      </label>
+
+      <button class="submit-btn" id="submitBtn" disabled onclick="handleSubmit()">
+        Confirm opt-in →
+      </button>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-card" id="successCard">
+      <div class="checkmark">✅</div>
+      <h2>You're confirmed!</h2>
+      <p>Your coach will be able to send you ride check messages for upcoming events. You'll only hear from them when there's an event coming up.</p>
+      <div class="stop-note">Reply STOP to any message at any time to opt out</div>
+    </div>
+
+    <!-- Legal -->
+    <p class="legal-note">
+      Message frequency varies based on upcoming events, typically 1–3 messages per event.<br>
+      Message and data rates may apply.<br>
+      <a href="/borgo/">Privacy Policy</a> · <a href="/borgo/">Terms of Service</a><br><br>
+      Questions? Contact your coach or email <a href="mailto:privacy@borgoapp.com">privacy@borgoapp.com</a>
+    </p>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Borgo · <a href="/borgo/">Legal</a> · Built for youth sports families</p>
+  </footer>
+
+  <script>
+    const nameInput    = document.getElementById('name');
+    const phoneInput   = document.getElementById('phone');
+    const teamInput    = document.getElementById('team');
+    const consentBox   = document.getElementById('consent');
+    const submitBtn    = document.getElementById('submitBtn');
+    const formCard     = document.getElementById('formCard');
+    const successCard  = document.getElementById('successCard');
+
+    function checkForm() {
+      const phoneDigits = phoneInput.value.replace(/\D/g, '');
+      const valid = nameInput.value.trim().length > 1
+                 && phoneDigits.length >= 7
+                 && teamInput.value.trim().length > 1
+                 && consentBox.checked;
+      submitBtn.disabled = !valid;
+    }
+
+    // Format phone as user types
+    phoneInput.addEventListener('input', () => {
+      let digits = phoneInput.value.replace(/\D/g, '').substring(0, 10);
+      if (digits.length >= 7) {
+        phoneInput.value = `(${digits.substring(0,3)}) ${digits.substring(3,6)}-${digits.substring(6)}`;
+      } else if (digits.length >= 4) {
+        phoneInput.value = `(${digits.substring(0,3)}) ${digits.substring(3)}`;
+      } else if (digits.length > 0) {
+        phoneInput.value = digits;
+      }
+      checkForm();
+    });
+
+    nameInput.addEventListener('input', checkForm);
+    teamInput.addEventListener('input', checkForm);
+    consentBox.addEventListener('change', checkForm);
+
+    function handleSubmit() {
+      if (submitBtn.disabled) return;
+      // In production this would POST to your backend
+      // For now it just shows the success state
+      formCard.style.display = 'none';
+      successCard.style.display = 'block';
+      successCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+
+</body>
+</html>
