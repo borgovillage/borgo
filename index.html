@@ -339,6 +339,23 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
     return false;
   }
+
+  // Auto-switch section based on URL hash
+  (function() {
+    var h = window.location.hash.replace('#','');
+    if (h === 'terms-of-service') {
+      var sec = document.getElementById('terms-of-service');
+      var priv = document.getElementById('privacy-policy');
+      if (sec && priv) {
+        priv.style.display = 'none';
+        sec.style.display = 'block';
+        var tabs = document.querySelectorAll('nav a');
+        tabs.forEach(function(t){ t.classList.remove('active'); });
+        if (tabs[1]) tabs[1].classList.add('active');
+      }
+    }
+  })();
+
 </script>
 
 </body>
